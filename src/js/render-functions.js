@@ -1,54 +1,39 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
 
 import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
 
-import { setGallery } from '../main';
-import { imgCollection } from '../main';
-import { addPage } from '../main';
-let imgsetAdd = {};
+export const setGallery = document.querySelector('.gallery');
 
-export async function renderImgs(images) {
-  setGallery.innerHTML = '';
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+});
 
-  const imgGallery = imgCollection
-    .map(
-      image => `<li class="img-blok">
-        <a href="${image.largeImageURL}">     
-    <img  src="${image.webformatURL}"
-    data-source="${image.largeImageURL}"
-    alt="${image.tags}">
-   
-    <ul class="image-descript">
-  <li>
-    <h3>likes</h3>
-    <p>${image.likes}</p>
-  </li>
-  <li>
-    <h3>views</h3>
-    <p>${image.views}</p>
-  </li>
-  <li>
-    <h3>comments</h3>
-    <p>${image.comments}</p>
-  </li>
-  <li>
-    <h3>downloads</h3>
-    <p>${image.downloads}</p>
-  </li>
-    </ul>
-  </a></li>`
-    )
-    .join('');
+lightbox.refresh();
 
-  addPage > 1 ? (imgsetAdd += imgGallery) : (imgsetAdd = imgGallery);
+export function renderImgs(images) {
 
-  setGallery.insertAdjacentHTML('beforeend', imgsetAdd);
-
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
+  images.forEach(image => {
+    const imgGallery = `
+      <li class="card">
+        <a href="${image.largeImageURL}" class="link">
+          <img src="${image.webformatURL}" alt="${image.tags}">
+          <ul class="list-container">
+          <li class="item-description"><h3>Likes</h3> <p>${image.likes}</p></li>
+          <li class="item-description"><h3>Views</h3> <p>${image.views}</p></li>
+          <li class="item-description"><h3>Comments</h3> <p>${image.comments}</p></li>
+          <li class="item-description"><h3>Downloads</h3> <p>${image.downloads}</p></li>
+        </ul>
+        </a>
+        
+      </li>
+    `;
+    setGallery.insertAdjacentHTML('beforeend', imgGallery);
   });
-
   lightbox.refresh();
+}
+export function showEndOfCollectionMessage() {
+  const endMessage = document.createElement('p');
+  endMessage.classList.add('end-message');
+  endMessage.textContent =
+    "We're sorry, but you've reached the end of search results.";
+  setGallery.insertAdjacentElement('afterend', endMessage);
 }
