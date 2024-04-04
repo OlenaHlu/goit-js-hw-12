@@ -4,32 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homework 12</title>
+
     
     <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-95dc692e.js">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-550cebad.js">
     <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-cf6910df.css">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-ba7bbc54.css">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-a1284295.css">
   </head>
   <body>
-    <div class="preloader">
-      <div class="preloader__row">
-        <p>load</p>
-        <div class="preloader__item"></div>
-        <div class="preloader__item"></div>
-      </div>
-    </div>
-
-    <form autocomplete="off">
-      <input type="text" placeholder="Search images..." />
-      <button type="submit" id="search">Search</button>
+    <form class="form">
+      <input type="text" class="search-input" placeholder="Search images..." />
+      <button type="submit" class="search-button">Search</button>
     </form>
 
     <ul class="gallery"></ul>
+    <button type="button" class="load-more-btn">Load more</button>
+    <div class="loader"></div>
 
-    <button type="button" id="addImg">Load more</button>
+    <button class="scroll-to-top" type="button">back</button>
 
-    
-    
+    <script src="https://pixabay.com/api/docs/"></script>
     
   </body>
 </html>
