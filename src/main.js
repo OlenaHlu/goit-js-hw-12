@@ -7,7 +7,6 @@ import { getImage } from './js/pixabay-api';
 import {
   renderImgs,
   setGallery,
-  showEndOfCollectionMessage,
 } from './js/render-functions';
 
 
@@ -43,7 +42,6 @@ async function submitHandle(event) {
     return;
   }
 
-  hideEndOfCollectionMessage();
 
   showLoader();
   try {
@@ -67,7 +65,8 @@ async function submitHandle(event) {
     }
     if (perPage * pageCounter >= totalHits) {
       hideLoadMoreBtn();
-      showEndOfCollectionMessage();
+
+      endOfCollectionMessage();
     }
   } catch (error) {
     console.error('Error fetching images:', error);
@@ -93,7 +92,8 @@ loadMoreBtn.addEventListener('click', async () => {
     showLoader();
     if (perPage * pageCounter >= totalHits) {
       hideLoadMoreBtn();
-      showEndOfCollectionMessage();
+
+      endOfCollectionMessage();
     }
 
     const galleryCardHeight =
@@ -129,13 +129,13 @@ function hideLoadMoreBtn() {
   loadMoreBtn.style.display = 'none';
 }
 
-function hideEndOfCollectionMessage() {
-  const endMessage = document.querySelector('.end-message');
-  if (endMessage) {
-    endMessage.remove();
-  }
+function endOfCollectionMessage() {
+    iziToast.info({
+        title: 'End of Collection',
+      message: "We're sorry, but you've reached the end of search results.",
+        position: 'center'
+    });
 }
-
 
 window.addEventListener('scroll', () => {
   if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {

@@ -30,10 +30,4 @@ export function renderImgs(images) {
   });
   lightbox.refresh();
 }
-export function showEndOfCollectionMessage() {
-  const endMessage = document.createElement('p');
-  endMessage.classList.add('end-message');
-  endMessage.textContent =
-    "We're sorry, but you've reached the end of search results.";
-  setGallery.insertAdjacentElement('afterend', endMessage);
-}
+
